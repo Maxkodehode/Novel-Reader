@@ -14,7 +14,28 @@
              to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
         <vm:MainWindowViewModel/>
     </Design.DataContext>
-
-    <TextBlock Text="{Binding Greeting}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-
+    
+    <DockPanel>
+        <!-- Menu Bar -->
+        <Menu DockPanel.Dock="Top">
+            <MenuItem Header="File">
+                <MenuItem Header="Open EPUB..."/>
+                <Separator/>
+                <MenuItem Header="Exit"/>
+            </MenuItem>
+            <MenuItem Header="View">
+            </MenuItem>
+        </Menu>
+        
+        <!-- Main Content Area -->
+        <ScrollViewer>
+            <TextBlock Text="{Binding ContentText}" 
+                       TextWrapping="Wrap"
+                       Margin="20">
+                <TextBlock.FontSize>
+                    <Binding />
+                </TextBlock.FontSize>
+            </TextBlock>
+        </ScrollViewer>
+    </DockPanel>
 </Window>
