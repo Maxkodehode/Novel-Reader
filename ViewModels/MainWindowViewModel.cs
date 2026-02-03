@@ -1,34 +1,36 @@
 ﻿using System;
 using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
-using System.Collections.ObjectModel;
 using System.IO;
 using System.Threading.Tasks;
+using Avalonia.Controls;
 
 namespace Novel_Reader.ViewModels;
 
 public partial class MainWindowViewModel : ViewModelBase
 {
-    // Constructor - this is where you call LoadTextFile
-    public MainWindowViewModel()
-    {
-        LoadTextFile();
-    }
+    [ObservableProperty] private double _readerFontSize = 16;
+    [ObservableProperty] private string _readerFontFamily = "Arial";
+    [ObservableProperty] private string _contentText = "Please select a file to begin.";
 
-    private async void LoadTextFile()
+    public MainWindowViewModel() { }
+
+    
+    public async Task OpenAndRead(Window window)
     {
-        try
+        
+        string? filePath = await OpenNewFolder(window);
+
+        if (!string.IsNullOrEmpty(filePath))
         {
-            string filePath = "/home/eikichi/RiderProjects/Novel-Reader/Neofetch.txt";
-            ContentText = await File.ReadAllTextAsync(filePath);
-        }
-        catch (Exception ex)
-        {
-            ContentText = $"Could not load file: {ex.Message}";
+            try
+            {
+                
+                ContentText = await File.ReadAllTextAsync(filePath);
+            }
+            catch (Exception ex)
+            {
+                ContentText = $"Failed to load novel: {ex.Message}";
+            }
         }
     }
-
-    // You need the ObservableProperty attribute for binding to work!
-    [ObservableProperty]
-    private string _contentText = "Loading...";
 }

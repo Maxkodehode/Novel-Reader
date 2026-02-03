@@ -11,8 +11,8 @@ public class FileChecker
         switch (extension)
         {
             case ".pdf":
-            var converter = new PDFConverter();
-            converter.Pdfconvert(filePath);
+            
+            PDFConverter.PdfConvert(filePath);
             break;
             }
     }

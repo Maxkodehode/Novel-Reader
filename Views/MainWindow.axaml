@@ -19,7 +19,9 @@
         <!-- Menu Bar -->
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="File">
-                <MenuItem Header="Open EPUB..."/>
+                <MenuItem Header="Open New" 
+                          Command="{Binding OpenNewFolderCommand}" 
+                          CommandParameter="{Binding $parent[Window]}" />
                 <Separator/>
                 <MenuItem Header="Exit"/>
             </MenuItem>
@@ -31,10 +33,9 @@
         <ScrollViewer>
             <TextBlock Text="{Binding ContentText}" 
                        TextWrapping="Wrap"
-                       Margin="20">
-                <TextBlock.FontSize>
-                    <Binding />
-                </TextBlock.FontSize>
+                       Margin="20"
+                       FontSize="{Binding ReaderFontSize}"
+                       FontFamily="{Binding ReaderFontFamily}">
             </TextBlock>
         </ScrollViewer>
     </DockPanel>
