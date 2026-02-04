@@ -23,7 +23,9 @@
                           Command="{Binding OpenNewFolderCommand}" 
                           CommandParameter="{Binding $parent[Window]}" />
                 <Separator/>
-                <MenuItem Header="Exit"/>
+                <MenuItem Header="Change save folder"
+                          Command="{Binding ChangeSaveDirectoryCommand}"
+                          CommandParameter="{Binding $parent[Window]}"/>
             </MenuItem>
             <MenuItem Header="View">
             </MenuItem>
