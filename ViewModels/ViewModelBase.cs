@@ -3,6 +3,8 @@ using System.Threading.Tasks;
 using Avalonia.Controls;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using Novel_Reader.MainWindowViewModel;
+using Novel_Reader.ViewModelBase;
 
 namespace Novel_Reader.ViewModels;
 
@@ -11,14 +13,18 @@ public partial class ViewModelBase : ObservableObject
     [RelayCommand]
     public async Task<string?> OpenNewFolder(Window window)
     {
-        // Remove the text here
         string? path = await DirectoryPicker.GetNovelFilePath(window);
-        return path;
+        if (path != null)
+        {
+            return FileChecker.CheckFileType(path);
+        }
+        return null;
     }
 
     [RelayCommand]
-    public async Task<string?> ChangeSaveDirectory(Window window)
+    public static async Task<string?> ChangeSaveDirectory(Window window)
     {
-        string userDocuments = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+        string? path = await DirectoryPicker.GetSaveDirectory(window);
+        return SaveDirectory.WhichPath(path);
     }
 }
