@@ -1,22 +1,24 @@
+using System;
 using System.IO;
-using Novel_Reader.ViewModelBase;
+using Novel_Reader;
 
-namespace Novel_Reader.MainWindowViewModel;
-
-public class FileChecker:SaveDirectory
+public class FileChecker
 {
     public static string? CheckFileType(string filePath)
     { 
-        string saveDirectory = WhichPath(path);
+        // Get the current save directory from settings
+        string saveDirectory = ActionSettings.Instance.SaveDirectory 
+                               ?? Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+        
         string extension = Path.GetExtension(filePath).ToLower();
 
         switch (extension)
         {
             case ".pdf":
-
                 PDFConverter.PdfConvert(filePath, saveDirectory);
                 break;
         }
         
+        return null;
     }
 }

@@ -3,8 +3,7 @@ using System.Threading.Tasks;
 using Avalonia.Controls;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using Novel_Reader.MainWindowViewModel;
-using Novel_Reader.ViewModelBase;
+using Novel_Reader.Helpers;
 
 namespace Novel_Reader.ViewModels;
 

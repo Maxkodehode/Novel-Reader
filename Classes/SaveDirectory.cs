@@ -1,23 +1,21 @@
 using System;
 using System.IO;
-using Novel_Reader.ViewModelBase;
 
-namespace Novel_Reader.ViewModelBase;
+namespace Novel_Reader.Helpers;
 
-public class SaveDirectory
+public class SaveDirectory : ActionSettings
 {
-    public static string DirectoryLocation { get; set; } =
-        Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-
-    public static void WhichPath(string newPath)
+    public static string WhichPath(string? newPath)
     {
         string userDocuments = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
 
         if (!string.IsNullOrEmpty(newPath) && Directory.Exists(newPath))
         {
-            DirectoryLocation = newPath;
+            Instance.SaveDirectory = newPath;
+            return newPath;
         }
 
-        DirectoryLocation = userDocuments;
+        Instance.SaveDirectory = userDocuments;
+        return userDocuments;
     }
 }

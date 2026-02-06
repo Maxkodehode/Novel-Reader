@@ -8,19 +8,11 @@ namespace Novel_Reader.ViewModels;
 
 public partial class MainWindowViewModel : ViewModelBase
 {
-    [ObservableProperty]
-    private double _readerFontSize = 16;
-
-    [ObservableProperty]
-    private string _readerFontFamily = "Arial";
-
-    [ObservableProperty]
-    private string _contentText = "Please select a file to begin.";
-
-    public MainWindowViewModel() { }
+    public ActionSettings Settings { get; } = new ActionSettings();
 
     public async Task OpenAndRead(Window window)
     {
+        string ContentText;
         string? filePath = await OpenNewFolder(window);
 
         if (!string.IsNullOrEmpty(filePath))
@@ -28,6 +20,8 @@ public partial class MainWindowViewModel : ViewModelBase
             try
             {
                 ContentText = await File.ReadAllTextAsync(filePath);
+                
+
             }
             catch (Exception ex)
             {

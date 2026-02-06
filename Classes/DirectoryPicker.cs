@@ -26,7 +26,7 @@ public static class DirectoryPicker
         var result = await storage.OpenFilePickerAsync(new FilePickerOpenOptions
         {
             Title = "Open Novel File",
-            AllowMultiple = false,
+            AllowMultiple = true,
             FileTypeFilter = new[] 
             { 
                 new FilePickerFileType("E-books") { Patterns = new[] { "*.pdf", "*.epub", "*.txt" } } 

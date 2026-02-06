@@ -1,24 +1,37 @@
 using System;
 using System.IO;
-using System.Threading.Tasks;
-using Aspose.Pdf;
-using Avalonia.Controls;
-using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
-using Novel_Reader.ViewModelBase;
+using System.Text;
+using UglyToad.PdfPig;
 
 namespace Novel_Reader;
 
-public class PDFConverter : ViewModels.MainWindowViewModel
+public class PDFConverter
 {
-    public static void PdfConvert(string path, string targetFolder)
+    public static string PdfConvert(string path, string targetFolder)
     {
-        var document = new Document(path);
         string fileName = Path.GetFileNameWithoutExtension(path);
+        string outputPath = Path.Combine(targetFolder, fileName + ".txt");
         
-        var newPath = SaveDirectory.WhichPath(path);
-        
-        string FinalPath = path.Replace(".pdf", ".epub");
-        document.Save(newPath, SaveFormat.Epub);
+        try
+        {
+            using (var document = PdfDocument.Open(path))
+            {
+                var text = new StringBuilder();
+                
+                foreach (var page in document.GetPages())
+                {
+                    text.AppendLine(page.Text);
+                    text.AppendLine(); // Add spacing between pages
+                }
+                
+                File.WriteAllText(outputPath, text.ToString());
+            }
+            
+            return outputPath;
+        }
+        catch (Exception ex)
+        {
+            throw new Exception($"Failed to convert PDF: {ex.Message}", ex);
+        }
     }
 }

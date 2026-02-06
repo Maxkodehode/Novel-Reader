@@ -33,11 +33,13 @@
         
         <!-- Main Content Area -->
         <ScrollViewer>
-            <TextBlock Text="{Binding ContentText}" 
+            <TextBlock Text="{Binding Settings.ContentText}" 
                        TextWrapping="Wrap"
                        Margin="20"
-                       FontSize="{Binding ReaderFontSize}"
-                       FontFamily="{Binding ReaderFontFamily}">
+                       FontSize="{Binding Settings.ReaderFontSize}"
+                       FontFamily="{Binding Settings.ReaderFontFamily}"
+                       Background="{Binding Settings.BackGroundColor}"
+                       Foreground="{Binding Settings.TextColor}">
             </TextBlock>
         </ScrollViewer>
     </DockPanel>
