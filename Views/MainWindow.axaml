@@ -17,7 +17,8 @@
     
     <DockPanel>
         <!-- Menu Bar -->
-        <Menu DockPanel.Dock="Top">
+        <!--<Menu Opacity="0" Background="#282828" Height="15" DockPanel.Dock="Top">
+            
             <MenuItem Header="File">
                 <MenuItem Header="Open New" 
                           Command="{Binding OpenNewFolderCommand}" 
@@ -29,13 +30,46 @@
             </MenuItem>
             <MenuItem Header="View">
             </MenuItem>
-        </Menu>
+        </Menu>-->
+        
+        <Grid>
+            <TextBlock Text="Main Content Area" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+
+            <Menu VerticalAlignment="Top" Background="#282828" Height="30">
+                <Menu.RenderTransform>
+                    <TranslateTransform Y="-30"/> </Menu.RenderTransform>
+        
+                <Menu.Transitions>
+                    <Transitions>
+                        <TransformOperationsTransition Property="RenderTransform" Duration="0:0:0.2"/>
+                    </Transitions>
+                </Menu.Transitions>
+
+                <Menu.Styles>
+                    <Style Selector="Menu:pointerover">
+                        <Setter Property="RenderTransform" Value="translateY(0px)"/>
+                    </Style>
+                </Menu.Styles>
+
+                <MenuItem Header="File">
+                    <MenuItem Header="Open New" 
+                              Command="{Binding OpenNewFolderCommand}" 
+                              CommandParameter="{Binding $parent[Window]}" />
+                    <Separator/>
+                    <MenuItem Header="Change save folder"
+                              Command="{Binding ChangeSaveDirectoryCommand}"
+                              CommandParameter="{Binding $parent[Window]}"/>
+                </MenuItem>
+                <MenuItem Header="View">
+                </MenuItem>
+            </Menu>
+        </Grid>
         
         <!-- Main Content Area -->
         <ScrollViewer>
             <TextBlock Text="{Binding Settings.ContentText}" 
                        TextWrapping="Wrap"
-                       Margin="20"
+                       Margin="1"
                        FontSize="{Binding Settings.ReaderFontSize}"
                        FontFamily="{Binding Settings.ReaderFontFamily}"
                        Background="{Binding Settings.BackGroundColor}"

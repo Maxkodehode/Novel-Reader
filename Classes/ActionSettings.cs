@@ -22,9 +22,9 @@ public partial class ActionSettings : ObservableObject
     private string _selectedFile = "";
     
     [ObservableProperty]
-    private string _backGroundColor = "#462301";
+    private string _backGroundColor = "#282828";
     
     [ObservableProperty]
-    private string _textColor = "#9C8877";
+    private string _textColor = "#D5C4A1";
     
 }
