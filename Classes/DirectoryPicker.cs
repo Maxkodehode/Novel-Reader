@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using System.Linq;
 namespace Novel_Reader;
 
-public static class DirectoryPicker
+ static class DirectoryPicker
 {
     public static async Task<string?> GetSaveDirectory(Window parentWindow)
     {

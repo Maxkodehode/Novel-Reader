@@ -2,30 +2,32 @@
 using System.IO;
 using System.Threading.Tasks;
 using Avalonia.Controls;
-using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 
 namespace Novel_Reader.ViewModels;
 
+// MainWindowViewModel is what your MainWindow.axaml binds to.
+// It exposes ActionSettings.Instance as a property called "Settings"
+// so your AXAML can do things like: FontSize="{Binding Settings.ReaderFontSize}"
+
 public partial class MainWindowViewModel : ViewModelBase
 {
-    public ActionSettings Settings { get; } = new ActionSettings();
+    // Expose the single ActionSettings instance to the UI
+    public ActionSettings Settings => ActionSettings.Instance;
 
     public async Task OpenAndRead(Window window)
     {
-        string ContentText;
         string? filePath = await OpenNewFolder(window);
 
         if (!string.IsNullOrEmpty(filePath))
         {
             try
             {
-                ContentText = await File.ReadAllTextAsync(filePath);
-                
-
+                Settings.ContentText = await File.ReadAllTextAsync(filePath);
             }
             catch (Exception ex)
             {
-                ContentText = $"Failed to load novel: {ex.Message}";
+                Settings.ContentText = $"Failed to load novel: {ex.Message}";
             }
         }
     }

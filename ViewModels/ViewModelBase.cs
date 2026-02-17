@@ -1,11 +1,13 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Avalonia.Controls;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Novel_Reader.Helpers;
 
 namespace Novel_Reader.ViewModels;
+
+// ViewModelBase holds commands that are shared across all ViewModels.
+// It does NOT hold any state — that lives in ActionSettings.Instance.
 
 public partial class ViewModelBase : ObservableObject
 {
@@ -25,5 +27,12 @@ public partial class ViewModelBase : ObservableObject
     {
         string? path = await DirectoryPicker.GetSaveDirectory(window);
         return SaveDirectory.WhichPath(path);
+    }
+
+    [RelayCommand]
+    private void TriggerPane()
+    {
+        // Toggle the bool on ActionSettings.Instance directly
+        ActionSettings.Instance.IsPaneOpen = !ActionSettings.Instance.IsPaneOpen;
     }
 }

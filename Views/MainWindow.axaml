@@ -31,39 +31,37 @@
             <MenuItem Header="View">
             </MenuItem>
         </Menu>-->
+        <Button VerticalAlignment="Top" Command="{Binding TriggerPaneCommand}">
+                                -
+                            </Button>
         
-        <Grid>
-            <TextBlock Text="Main Content Area" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        <SplitView IsPaneOpen="{Binding Settings.IsPaneOpen}"
+                   DisplayMode="CompactInline"
+                   CompactPaneLength="1"
+                   OpenPaneLength="150"
+                   FontSize="10">
+            <SplitView.Pane>
+                <StackPanel>
+                    
+                    <ListBox>
+                        <ListBoxItem>- Open New</ListBoxItem>
+                        <ListBoxItem>- Set New Save Directory</ListBoxItem>
+                        <ListBoxItem></ListBoxItem>
+                        <ListBoxItem></ListBoxItem>
+                        <ListBoxItem></ListBoxItem>
+                        <ListBoxItem></ListBoxItem>
+                        <ListBoxItem></ListBoxItem>
+                        <ListBoxItem></ListBoxItem>
+                        
+                        
+                            
+                        
+                    </ListBox>
+                </StackPanel>
 
-            <Menu VerticalAlignment="Top" Background="#282828" Height="30">
-                <Menu.RenderTransform>
-                    <TranslateTransform Y="-30"/> </Menu.RenderTransform>
-        
-                <Menu.Transitions>
-                    <Transitions>
-                        <TransformOperationsTransition Property="RenderTransform" Duration="0:0:0.2"/>
-                    </Transitions>
-                </Menu.Transitions>
-
-                <Menu.Styles>
-                    <Style Selector="Menu:pointerover">
-                        <Setter Property="RenderTransform" Value="translateY(0px)"/>
-                    </Style>
-                </Menu.Styles>
-
-                <MenuItem Header="File">
-                    <MenuItem Header="Open New" 
-                              Command="{Binding OpenNewFolderCommand}" 
-                              CommandParameter="{Binding $parent[Window]}" />
-                    <Separator/>
-                    <MenuItem Header="Change save folder"
-                              Command="{Binding ChangeSaveDirectoryCommand}"
-                              CommandParameter="{Binding $parent[Window]}"/>
-                </MenuItem>
-                <MenuItem Header="View">
-                </MenuItem>
-            </Menu>
-        </Grid>
+            </SplitView.Pane>
+            
+        </SplitView>
         
         <!-- Main Content Area -->
         <ScrollViewer>
