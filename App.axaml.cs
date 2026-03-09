@@ -1,8 +1,9 @@
+using System.Linq;
 using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Data.Core.Plugins;
-using System.Linq;
 using Avalonia.Markup.Xaml;
+using AvaloniaPdfViewer;
 using Novel_Reader.Services;
 using Novel_Reader.ViewModels;
 using Novel_Reader.Views;
@@ -26,10 +27,7 @@ public partial class App : Application
         {
             DisableAvaloniaDataAnnotationValidation();
 
-            desktop.MainWindow = new MainWindow
-            {
-                DataContext = new MainWindowViewModel(),
-            };
+            desktop.MainWindow = new MainWindow { DataContext = new MainWindowViewModel() };
 
             // Save settings to JSON when the app closes
             desktop.Exit += (_, _) => Settings.Save();
@@ -40,8 +38,9 @@ public partial class App : Application
 
     private void DisableAvaloniaDataAnnotationValidation()
     {
-        var dataValidationPluginsToRemove =
-            BindingPlugins.DataValidators.OfType<DataAnnotationsValidationPlugin>().ToArray();
+        var dataValidationPluginsToRemove = BindingPlugins
+            .DataValidators.OfType<DataAnnotationsValidationPlugin>()
+            .ToArray();
 
         foreach (var plugin in dataValidationPluginsToRemove)
             BindingPlugins.DataValidators.Remove(plugin);

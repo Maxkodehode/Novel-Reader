@@ -21,7 +21,7 @@ public partial class ActionSettings : ObservableObject
     private string _readerFontFamily = "Arial";
 
     [ObservableProperty]
-    private string _contentText = "Please select a file to begin.";
+    private string _contentText = "/home/onizuka/Novel-Reader/PdfTestFiles/TestChapter.pdf";
 
     [ObservableProperty]
     private string _selectedFile = "";
